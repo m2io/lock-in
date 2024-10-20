@@ -1,0 +1,31 @@
+{
+	"name": "lock-in-ext",
+	"type": "module",
+	"version": "0.0.0",
+	"private": true,
+	"packageManager": "pnpm@9.12.2+sha512.22721b3a11f81661ae1ec68ce1a7b879425a1ca5b991c975b074ac220b187ce56c708fe5db69f4c962c989452eee76c82877f4ee80f474cebd61ee13461b6228",
+	"description": "manifest.json description",
+	"scripts": {
+		"dev": "wxt",
+		"dev:firefox": "wxt -b firefox",
+		"build": "wxt build",
+		"build:firefox": "wxt build -b firefox",
+		"zip": "wxt zip",
+		"zip:firefox": "wxt zip -b firefox",
+		"compile": "vue-tsc --noEmit",
+		"postinstall": "wxt prepare",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix"
+	},
+	"dependencies": {
+		"vue": "^3.5.11"
+	},
+	"devDependencies": {
+		"@antfu/eslint-config": "^3.8.0",
+		"@wxt-dev/module-vue": "^1.0.1",
+		"eslint": "^9.13.0",
+		"typescript": "^5.6.2",
+		"vue-tsc": "^2.1.6",
+		"wxt": "^0.19.11"
+	}
+}
