@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import AppIconsSprite from '@/components/AppIconsSprite.vue'
 import { useWebsiteController } from '@/composables/useWebsiteController'
 import { onMounted } from 'vue'
 import { RouterView } from 'vue-router'
@@ -11,7 +12,10 @@ onMounted(async () => {
 </script>
 
 <template>
-	<main>
-		<RouterView />
-	</main>
+	<div>
+		<AppIconsSprite />
+		<main>
+			<RouterView />
+		</main>
+	</div>
 </template>
