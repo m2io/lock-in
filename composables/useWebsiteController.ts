@@ -43,6 +43,10 @@ export function useWebsiteController() {
 	}
 
 	async function createWebsiteEntry(website: Website) {
+		if (state.value.websites.find((w) => w.url === website.url)) {
+			return
+		}
+
 		state.value.websites.push(website)
 		const currentStateStringified = JSON.stringify(state.value.websites)
 		await storage.setItem('local:websites', currentStateStringified)
