@@ -9,22 +9,11 @@ export interface Website {
 	blocked: boolean
 }
 
-const sites = [
-	{
-		url: 'youtube.com',
-		blocked: false,
-	},
-	{
-		url: 'x.com',
-		blocked: true,
-	},
-]
-
 const state = ref<StorageState>({
-	websites: sites,
+	websites: [],
 })
 
-const initialWebsitesState = ref<Website[]>(sites)
+const initialWebsitesState = ref<Website[]>([])
 
 export function useWebsiteController() {
 	async function getWebsiteEntries() {
