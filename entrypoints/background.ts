@@ -11,9 +11,13 @@ export default defineBackground({
 		browser.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
 			if (changeInfo.status === 'complete' && tab.url) {
 				await getWebsiteEntries()
-				const currentUrl = new URL(tab.url!).hostname
+				const currentUrl = new URL(tab.url)
 
-				const matchedWebsite = state.value.websites.find((site) => currentUrl.includes(site.url))
+				const matchedWebsite = state.value.websites.find((site) => {
+					const [hostname, ...path] = site.url.split('/')
+					return currentUrl.hostname.includes(hostname) && currentUrl.pathname.includes(path.join('/'))
+				})
+
 				if (!matchedWebsite) {
 					return
 				}
