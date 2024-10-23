@@ -24,9 +24,6 @@ export default defineBackground({
 
 				if (matchedWebsite.blocked) {
 					browser.tabs.update(tabId, { url: browser.runtime.getURL('/lock-in.html') })
-				} else {
-					// Implement time tracking logic here
-					console.log(`Tracking time spent on ${currentUrl}`)
 				}
 			}
 		})
