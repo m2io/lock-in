@@ -3,5 +3,6 @@ export function useIcons() {
 		checkmark: 'material-symbols-check-rounded',
 		delete: 'material-symbols-delete-forever-outline-rounded',
 		settings: 'iconamoon-settings',
+		add: 'material-symbols-add-rounded',
 	}
 }

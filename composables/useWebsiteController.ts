@@ -32,7 +32,7 @@ export function useWebsiteController() {
 	}
 
 	async function createWebsiteEntry(website: Website) {
-		if (state.value.websites.find((w) => w.url === website.url)) {
+		if (!website?.url || state.value.websites.find((w) => w.url === website.url)) {
 			return
 		}
 

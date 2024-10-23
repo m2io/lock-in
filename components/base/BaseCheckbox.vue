@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BaseIcon from '@/components/BaseIcon.vue'
+import BaseIcon from '@/components/base/BaseIcon.vue'
 
 defineProps<{
 	id: string
@@ -13,8 +13,8 @@ const isChecked = defineModel<boolean>()
 		:for="id"
 		class="min-w-5 min-h-5 border rounded-[7px] group inline-flex items-center justify-center cursor-pointer transition-all duration-200 ease-in-out"
 		:class="{
-			'bg-indigo-500 border-indigo-600': isChecked,
-			'border-zinc-500': !isChecked,
+			'bg-zinc-925 border-zinc-900': isChecked,
+			'border-zinc-300': !isChecked,
 		}"
 	>
 		<input
@@ -27,7 +27,7 @@ const isChecked = defineModel<boolean>()
 		<div
 			class="absolute"
 			:class="{
-				'group-hover:block hidden text-zinc-500': !isChecked,
+				'group-hover:block hidden text-zinc-400': !isChecked,
 				'block': isChecked,
 			}"
 		>

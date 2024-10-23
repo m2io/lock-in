@@ -19,7 +19,8 @@ const modelValue = defineModel<string>()
 	<input
 		:id="id"
 		v-model="modelValue"
-		class="border border-zinc-700 p-2 bg-zinc-800 rounded w-full"
+		class="border border-zinc-200 px-2 h-9 bg-white text-[14px] rounded-md w-full"
 		:placeholder="placeholder"
+		autocomplete="off"
 	/>
 </template>

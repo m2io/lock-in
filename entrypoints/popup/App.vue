@@ -1,102 +1,39 @@
 <script setup lang="ts">
-import AppIconsSprite from '@/components/AppIconsSprite.vue'
-import BaseButton from '@/components/BaseButton.vue'
-import BaseCheckbox from '@/components/BaseCheckbox.vue'
-import BaseInput from '@/components/BaseInput.vue'
+import AppCreateEntryForm from '@/components/AppCreateEntryForm.vue'
+import AppEntryList from '@/components/AppEntryList.vue'
+import AppEntryUpdateButton from '@/components/AppEntryUpdateButton.vue'
+import BaseIconSprite from '@/components/base/BaseIconSprite.vue'
 
 import { useWebsiteController } from '@/composables/useWebsiteController'
-import { onMounted, ref, watch } from 'vue'
+import { onMounted } from 'vue'
 
-const { state, initialWebsitesState, createWebsiteEntry, getWebsiteEntries, updateWebsiteEntries, deleteWebsiteEntry } = useWebsiteController()
+const { getWebsiteEntries, state } = useWebsiteController()
 
 onMounted(async () => {
 	await getWebsiteEntries()
 })
-
-const newWebsite = ref('')
-async function handleSubmit() {
-	await createWebsiteEntry({ url: newWebsite.value, blocked: true })
-	newWebsite.value = ''
-}
-
-const updateButtonDisabled = ref(true)
-watch(
-	() => state.value.websites,
-	(nv) => {
-		if (nv.length !== 0 && nv.length === initialWebsitesState.value.length) {
-			const currentStateChanged = nv.some((site, index) => {
-				if (site.blocked !== initialWebsitesState.value[index].blocked || site.url !== initialWebsitesState.value[index].url) {
-					return true
-				}
-
-				return false
-			})
-
-			updateButtonDisabled.value = !currentStateChanged
-		}
-	},
-	{
-		deep: true,
-	},
-)
-
-async function handleUpdate() {
-	await updateWebsiteEntries()
-	updateButtonDisabled.value = true
-}
 </script>
 
 <template>
-	<AppIconsSprite />
-	<article class="flex flex-col gap-y-4 p-4">
-		<form
-			class="flex gap-x-2"
-			@submit.prevent="handleSubmit"
-		>
-			<BaseInput
-				id="new-website"
-				v-model="newWebsite"
-				placeholder="youtube.com/shorts, x.com"
-			/>
-			<BaseButton
-				type="submit"
-				class="whitespace-nowrap"
+	<BaseIconSprite />
+	<main class="h-full flex flex-col">
+		<section class="px-3 pt-4 pb-2 border-b border-zinc-200">
+			<AppCreateEntryForm />
+		</section>
+		<section class="flex-1">
+			<AppEntryList v-if="state.websites.length" />
+			<div
+				v-else
+				class="flex justify-center items-center h-full"
 			>
-				Block Site
-			</BaseButton>
-		</form>
-		<ul
-			v-if="state.websites.length"
-			class="flex flex-col gap-y-2"
-		>
-			<li
-				v-for="(site, index) in state.websites"
-				:key="index"
-				class="flex items-center gap-x-4"
-			>
-				<BaseCheckbox
-					:id="`checkbox-${index}`"
-					v-model="site.blocked"
-				/>
-				<BaseInput
-					v-model="site.url"
-					placeholder="youtube.com/shorts or x.com"
-				/>
+				<p class="text-zinc-400 text-lg font-medium">
+					Start blocking websites and get back to work.
+				</p>
+			</div>
+		</section>
 
-				<BaseButton
-					variant="ghost"
-					icon="delete"
-					@click="deleteWebsiteEntry(index)"
-				/>
-			</li>
-		</ul>
-		<BaseButton
-			v-if="state.websites.length"
-			class="w-full"
-			:disabled="updateButtonDisabled"
-			@click="handleUpdate"
-		>
-			Sync changes
-		</BaseButton>
-	</article>
+		<section class="p-4 border-t border-zinc-200 empty:hidden">
+			<AppEntryUpdateButton />
+		</section>
+	</main>
 </template>

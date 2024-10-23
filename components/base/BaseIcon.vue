@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useIcons } from '@/composables/useIcons'
 
-const { size = '16', name = '' } = defineProps<{
+const { size = '20', name = '' } = defineProps<{
 	name: keyof typeof icons
 	size?: string
 }>()
